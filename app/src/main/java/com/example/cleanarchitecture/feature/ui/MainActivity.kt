@@ -7,7 +7,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.cleanarchitecture.databinding.ActivityMainBinding
 import com.example.cleanarchitecture.feature.data.model.Transaccion
+import com.example.cleanarchitecture.feature.domain.TransaccionUseCase
 import com.example.cleanarchitecture.feature.viewmodel.MainViewModel
+import com.example.cleanarchitecture.feature.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewModel(){
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, MainViewModelFactory(TransaccionUseCase()))[MainViewModel::class.java]
 
         val transactionsObserver = Observer<List<Transaccion>> {
             Log.e("Transacciones",it.toString())

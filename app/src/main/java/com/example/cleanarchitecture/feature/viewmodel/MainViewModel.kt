@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.example.cleanarchitecture.feature.data.model.Transaccion
 import com.example.cleanarchitecture.feature.domain.TransaccionUseCase
 
-class MainViewModel: ViewModel() {
+class MainViewModel(val transaccionUseCase: TransaccionUseCase) : ViewModel() {
 
      private val listData = MutableLiveData<List<Transaccion>>()
-     val transactionsUseCase = TransaccionUseCase()
+    // val transactionsUseCase = TransaccionUseCase()
 
     init {
         getListTransactions("id1")
@@ -21,7 +21,7 @@ class MainViewModel: ViewModel() {
 
     // Podemos usar corrutinas para hacer las peticiones
     fun getListTransactions(idUser: String){
-        setListData(transactionsUseCase.getAllTransacctionsUser(idUser))
+        setListData(transaccionUseCase.getAllTransacctionsUser(idUser))
     }
 
     fun getLiveDataObserver(): LiveData<List<Transaccion>> {
